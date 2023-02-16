@@ -1,3 +1,5 @@
+package online.starsmc.hubcore;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -15,4 +17,5 @@ public class Main extends JavaPlugin {
     public void onDisable() {
 
     }
+
 }
