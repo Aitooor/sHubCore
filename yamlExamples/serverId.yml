@@ -1,0 +1,7 @@
+id: "Server Name"
+permission: "shubcore.server1"
+name: "Server Aliase"
+lore:
+  - "Test"
+  - "Test 2"
+  - "Test 3"
