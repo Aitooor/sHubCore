@@ -1,4 +1,4 @@
 id: "UUID.toString"
-canAccess:
+canAccessToServers:
   serverId: true/false
   otherServerId: true/false

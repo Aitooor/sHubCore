@@ -12,7 +12,7 @@ public class UserYamlCodec implements YamlCodec<UserModel> {
         Map<String, Object> serializedModel = new HashMap<>();
 
         serializedModel.put("id", model.getId());
-        serializedModel.put("canAccess", model.getCanAccess());
+        serializedModel.put("canAccessToServers", model.getCanAccess());
 
         return serializedModel;
     }
@@ -21,14 +21,14 @@ public class UserYamlCodec implements YamlCodec<UserModel> {
     public UserModel deserialize(Map<String, Object> modelData) {
         UUID uuid = UUID.fromString((String) modelData.get("id"));
 
-        Map<String, Boolean> userAccess = new HashMap<>();
-        Map<String, Object> serializedUserAccess = (Map<String, Object>) modelData.get("canAccess");
-        for (Map.Entry<String, Object> entry : serializedUserAccess.entrySet()) {
+        Map<String, Boolean> userAccessToServers = new HashMap<>();
+        Map<String, Object> serializedUserAccessToServers = (Map<String, Object>) modelData.get("canAccessToServers");
+        for (Map.Entry<String, Object> entry : serializedUserAccessToServers.entrySet()) {
             String serverId = entry.getKey();
             boolean canAccess = (boolean) entry.getValue();
-            userAccess.put(serverId, canAccess);
+            userAccessToServers.put(serverId, canAccess);
         }
 
-        return new UserModel(uuid, userAccess);
+        return new UserModel(uuid, userAccessToServers);
     }
 }

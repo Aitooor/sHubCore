@@ -8,11 +8,11 @@ import java.util.UUID;
 public class UserModel implements Model {
 
     private final UUID uuid;
-    private Map<String, Boolean> canAccess;
+    private Map<String, Boolean> canAccessToServers;
 
-    public UserModel(UUID uuid, Map<String, Boolean> canAccess) {
+    public UserModel(UUID uuid, Map<String, Boolean> canAccessToServers) {
         this.uuid = uuid;
-        this.canAccess = canAccess;
+        this.canAccessToServers = canAccessToServers;
     }
 
     @Override
@@ -25,10 +25,10 @@ public class UserModel implements Model {
     }
 
     public Map<String, Boolean> getCanAccess() {
-        return canAccess;
+        return canAccessToServers;
     }
 
-    public void setCanAccess(Map<String, Boolean> canAccess) {
-        this.canAccess = canAccess;
+    public void setCanAccess(Map<String, Boolean> canAccessToServers) {
+        this.canAccessToServers = canAccessToServers;
     }
 }
