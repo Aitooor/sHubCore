@@ -1,4 +1,4 @@
-package online.starsmc.hubcore.listeners;
+package online.starsmc.hubcore.listener;
 
 import org.bukkit.GameRule;
 import org.bukkit.World;
