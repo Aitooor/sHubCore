@@ -17,6 +17,7 @@ public class UserYamlCodec implements YamlCodec<UserModel> {
         return serializedModel;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public UserModel deserialize(Map<String, Object> modelData) {
         UUID uuid = UUID.fromString((String) modelData.get("id"));
