@@ -3,12 +3,11 @@ package online.starsmc.hubcore.user;
 import online.starsmc.hubcore.model.repository.CachedModelRepository;
 import online.starsmc.hubcore.server.ServerModel;
 
-import java.util.Map;
 import java.util.UUID;
 
 public class UserManager {
 
-    private CachedModelRepository<UserModel> cachedRepository;
+    private final CachedModelRepository<UserModel> cachedRepository;
 
     public UserManager(CachedModelRepository<UserModel> cachedRepository) {
         this.cachedRepository = cachedRepository;
@@ -20,10 +19,6 @@ public class UserManager {
             return false;
         }
 
-        if(!userModel.getCanAccess().get(serverModel.getId())) {
-            return false;
-        }
-
-        return true;
+        return userModel.getCanAccess().get(serverModel.getId());
     }
 }

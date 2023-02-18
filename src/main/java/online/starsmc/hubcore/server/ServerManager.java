@@ -8,12 +8,13 @@ import online.starsmc.hubcore.user.UserManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 
+@SuppressWarnings("rawtypes")
 public class ServerManager {
 
-    private Main plugin;
-    private CachedModelRepository cachedRepository;
-    private Logger logger;
-    private UserManager userManager;
+    private final Main plugin;
+    private final CachedModelRepository cachedRepository;
+    private final Logger logger;
+    private final UserManager userManager;
 
     public ServerManager(Main plugin, CachedModelRepository cachedRepository, Logger logger, UserManager userManager) {
         this.plugin = plugin;
@@ -22,6 +23,7 @@ public class ServerManager {
         this.userManager = userManager;
     }
 
+    @SuppressWarnings("unchecked")
     public void createServer(CommandSender sender, ServerModel serverModel) {
         try {
             cachedRepository.save(serverModel);
@@ -32,6 +34,7 @@ public class ServerManager {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void removeServer(CommandSender sender, String id) {
         try {
             ServerModel serverModel = (ServerModel) cachedRepository.getOrFind(id);

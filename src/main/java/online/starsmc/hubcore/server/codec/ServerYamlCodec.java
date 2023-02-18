@@ -19,15 +19,13 @@ public class ServerYamlCodec implements YamlCodec<ServerModel> {
         serializedModel.put("permission", model.getPermission());
         serializedModel.put("name", model.getName());
 
-        List<String> lore = new ArrayList<>();
-        for (String entry : model.getLore()) {
-            lore.add(entry);
-        }
+        List<String> lore = new ArrayList<>(model.getLore());
         serializedModel.put("lore", lore);
 
         return serializedModel;
     }
 
+    @SuppressWarnings({"unchecked", "CollectionAddedToSelf"})
     @Override
     public ServerModel deserialize(Map<String, Object> modelData) {
         String id = (String) modelData.get("id");
@@ -36,9 +34,7 @@ public class ServerYamlCodec implements YamlCodec<ServerModel> {
         String name = (String) modelData.get("name");
 
         List<String> serializedLore = (List<String>) modelData.get("lore");
-        for (String entry : serializedLore) {
-            serializedLore.add(entry);
-        }
+        serializedLore.addAll(serializedLore);
 
         return new ServerModel(id, server, name, serializedLore, permission);
     }
