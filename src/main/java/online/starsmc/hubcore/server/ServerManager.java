@@ -15,12 +15,14 @@ public class ServerManager {
     private final CachedModelRepository cachedRepository;
     private final Logger logger;
     private final UserManager userManager;
+    private final BungeeManager bungeeManager;
 
-    public ServerManager(Main plugin, CachedModelRepository cachedRepository, Logger logger, UserManager userManager) {
+    public ServerManager(Main plugin, CachedModelRepository cachedRepository, Logger logger, UserManager userManager, BungeeManager bungeeManager) {
         this.plugin = plugin;
         this.cachedRepository = cachedRepository;
         this.logger = logger;
         this.userManager = userManager;
+        this.bungeeManager = bungeeManager;
     }
 
     @SuppressWarnings("unchecked")
@@ -64,7 +66,7 @@ public class ServerManager {
                 return;
             }
 
-            new BungeeManager(plugin).teleportToServer(entity.getUniqueId(), serverModel.getServer());
+            bungeeManager.teleportToServer(entity.getUniqueId(), serverModel.getServer());
         } catch (Exception e) {
             entity.sendMessage("Error, can't teleport to the server");
             logger.error("Can't teleport to the server", e);
