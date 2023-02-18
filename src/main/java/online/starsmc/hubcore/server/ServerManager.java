@@ -29,7 +29,7 @@ public class ServerManager {
     public void createServer(CommandSender sender, ServerModel serverModel) {
         try {
             cachedRepository.save(serverModel);
-            sender.sendMessage("El servidor se ha creado correctamente");
+            sender.sendMessage("The server was create correctly");
         } catch (Exception e) {
             sender.sendMessage("Error, server was not created");
             logger.error("Error, server was not created", e);
