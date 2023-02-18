@@ -6,7 +6,7 @@ group = "online.starsmc"
 version = "1.0.0-SNAPSHOT"
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(16))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(8))
 }
 
 bukkit {
