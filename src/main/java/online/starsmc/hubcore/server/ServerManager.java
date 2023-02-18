@@ -1,12 +1,12 @@
 package online.starsmc.hubcore.server;
 
-import com.sun.org.slf4j.internal.Logger;
 import online.starsmc.hubcore.Main;
 import online.starsmc.hubcore.bungee.manager.BungeeManager;
 import online.starsmc.hubcore.model.repository.CachedModelRepository;
 import online.starsmc.hubcore.user.UserManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
+import org.slf4j.Logger;
 
 @SuppressWarnings("rawtypes")
 public class ServerManager {

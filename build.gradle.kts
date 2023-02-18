@@ -6,7 +6,7 @@ group = "online.starsmc"
 version = "1.0.0-SNAPSHOT"
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(8))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(16))
 }
 
 bukkit {
@@ -26,4 +26,6 @@ repositories {
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT")
     compileOnly("me.clip:placeholderapi:2.11.2")
+
+    implementation("org.slf4j:slf4j-api:2.0.6")
 }
