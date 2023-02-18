@@ -24,21 +24,36 @@ public interface ChatUtils {
     static void sendMsgPlayer(Player player, String message) {
         player.sendMessage(translate(message).replace("<player>", player.getName()));
     }
+    static void sendMsgPlayerPrefix(Player player, String message) {
+        sendMsgPlayer(player, getPrefixGame() + message);
+    }
 
     static void sendMsgPlayer(Player player, List<String> stringList) {
         stringList.forEach(message -> sendMsgPlayer(player, message));
+    }
+
+    static void sendMsgPlayerPrefix(Player player, List<String> stringList) {
+        stringList.forEach(message -> sendMsgPlayerPrefix(player, message));
     }
 
     static void sendMsgSender(CommandSender sender, String message) {
         sender.sendMessage(translate(message));
     }
 
+    static void sendMsgSenderPrefix(CommandSender sender, String message) {
+        sendMsgSender(sender, getPrefix() + message);
+    }
+
     static void sendMsgSender(CommandSender sender, List<String> stringList) {
         stringList.forEach(message -> sendMsgSender(sender, message));
     }
 
-    static String getPrefixGame(Player sender) {
-        return "&8[&bsHubCore&8]";
+    static void sendMsgSenderPrefix(CommandSender sender, List<String> stringList) {
+        stringList.forEach(message -> sendMsgSenderPrefix(sender, message));
+    }
+
+    static String getPrefixGame() {
+        return "&8[&bsHubCore&8] ";
     }
 
     static String getPrefix() {
