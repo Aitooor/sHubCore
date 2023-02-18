@@ -5,7 +5,6 @@ import com.google.common.io.ByteStreams;
 import online.starsmc.hubcore.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import java.util.UUID;
 
