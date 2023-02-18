@@ -66,7 +66,7 @@ public class ServerManager {
                 return;
             }
 
-            bungeeManager.teleportToServer(entity.getUniqueId(), serverModel.getServer());
+            bungeeManager.teleportToServer(entity.getUniqueId(), serverModel);
         } catch (Exception e) {
             entity.sendMessage("Error, can't teleport to the server");
             logger.error("Can't teleport to the server", e);
