@@ -25,8 +25,8 @@ public class BungeeManager {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Connect");
         out.writeUTF(server);
-        player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
         player.sendMessage("Teleported to the server " + server);
+        player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
     }
 
     //TODO Server local count, Total in Hubs count
