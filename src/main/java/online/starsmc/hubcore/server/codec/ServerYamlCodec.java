@@ -15,6 +15,7 @@ public class ServerYamlCodec implements YamlCodec<ServerModel> {
         Map<String, Object> serializedModel = new HashMap<>();
 
         serializedModel.put("id", model.getId());
+        serializedModel.put("server", model.getServer());
         serializedModel.put("permission", model.getPermission());
         serializedModel.put("name", model.getName());
 
@@ -30,6 +31,7 @@ public class ServerYamlCodec implements YamlCodec<ServerModel> {
     @Override
     public ServerModel deserialize(Map<String, Object> modelData) {
         String id = (String) modelData.get("id");
+        String server = (String) modelData.get("server");
         String permission = (String) modelData.get("permission");
         String name = (String) modelData.get("name");
 
@@ -38,6 +40,6 @@ public class ServerYamlCodec implements YamlCodec<ServerModel> {
             serializedLore.add(entry);
         }
 
-        return new ServerModel(id, name, serializedLore, permission);
+        return new ServerModel(id, server, name, serializedLore, permission);
     }
 }

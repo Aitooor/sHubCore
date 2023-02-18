@@ -7,12 +7,14 @@ import java.util.List;
 public class ServerModel implements Model {
 
     private final String id;
+    private String server;
     private String permission;
     private String name;
     private List<String> lore;
 
-    public ServerModel(String id, String name, List<String> lore, String permission) {
+    public ServerModel(String id, String name, String server, List<String> lore, String permission) {
         this.id = id;
+        this.server = server;
         this.name = name;
         this.lore = lore;
         this.permission = permission;
@@ -21,6 +23,14 @@ public class ServerModel implements Model {
     @Override
     public String getId() {
         return id;
+    }
+
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
     }
 
     public String getName() {
