@@ -1,10 +1,11 @@
 package online.starsmc.hubcore;
 
+import online.starsmc.hubcore.bungee.BungeeService;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-    private BungeeManager bungeeManager;
+    private BungeeService bungeeService;
 
     @Override
     public void onLoad() {
@@ -12,11 +13,11 @@ public class Main extends JavaPlugin {
     }
     @Override
     public void onEnable() {
-        bungeeManager.run();
+        bungeeService.run();
     }
 
     @Override
     public void onDisable() {
-        bungeeManager.disable();
+        bungeeService.disable();
     }
 }

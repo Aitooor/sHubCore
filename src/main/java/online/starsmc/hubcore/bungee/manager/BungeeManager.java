@@ -1,7 +1,8 @@
-package online.starsmc.hubcore;
+package online.starsmc.hubcore.bungee.manager;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import online.starsmc.hubcore.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
@@ -16,17 +17,6 @@ public class BungeeManager {
         this.plugin = plugin;
     }
 
-    public void run() {
-        plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
-        plugin.getServer().getMessenger().registerIncomingPluginChannel(plugin, "BungeeCord", (PluginMessageListener) plugin);
-    }
-
-    public void disable() {
-        //make sure to unregister the registered channels in case of a reload
-        plugin.getServer().getMessenger().unregisterOutgoingPluginChannel(plugin);
-        plugin.getServer().getMessenger().unregisterIncomingPluginChannel(plugin);
-    }
-
     @SuppressWarnings("UnstableApiUsage")
     public void teleportToServer(UUID uuid, String server) {
         Player player = Bukkit.getPlayer(uuid);
@@ -39,4 +29,6 @@ public class BungeeManager {
         player.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
         player.sendMessage("Teleported to the server " + server);
     }
+
+    //TODO Server local count, Total in Hubs count
 }
