@@ -27,8 +27,12 @@ public class BungeeManager {
         plugin.getServer().getMessenger().unregisterIncomingPluginChannel(plugin);
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     public void teleportToServer(UUID uuid, String server) {
         Player player = Bukkit.getPlayer(uuid);
+        if (player == null) {
+            return;
+        }
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Connect");
         out.writeUTF(server);
