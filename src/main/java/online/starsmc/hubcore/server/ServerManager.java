@@ -27,19 +27,19 @@ public class ServerManager {
             cachedRepository.save(serverModel);
             sender.sendMessage("El servidor se ha creado correctamente");
         } catch (Exception e) {
-            sender.sendMessage("Error, warp was not created");
-            logger.error("Error, warp was not created", e);
+            sender.sendMessage("Error, server was not created");
+            logger.error("Error, server was not created", e);
         }
     }
 
     public void removeServer(CommandSender sender, String id) {
         try {
-            ServerModel warpModel = (ServerModel) cachedRepository.getOrFind(id);
-            if(warpModel == null) {
+            ServerModel serverModel = (ServerModel) cachedRepository.getOrFind(id);
+            if(serverModel == null) {
                 sender.sendMessage("The server not exist");
                 return;
             }
-            cachedRepository.removeInBoth(warpModel);
+            cachedRepository.removeInBoth(serverModel);
             sender.sendMessage("The server was removed correctly");
         } catch (Exception e) {
             sender.sendMessage("The server couldn't be removed");
@@ -57,7 +57,7 @@ public class ServerManager {
             }
 
             if(!userManager.canAccessServer(entity.getUniqueId(), serverModel)){
-                entity.sendMessage("You can't access to the warp");
+                entity.sendMessage("You can't access to the server");
                 return;
             }
 
