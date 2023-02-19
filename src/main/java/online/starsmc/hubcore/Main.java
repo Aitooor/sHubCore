@@ -2,11 +2,10 @@ package online.starsmc.hubcore;
 
 import online.starsmc.hubcore.scoreboard.ScoreboardManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.messaging.PluginMessageListener;
 
 public class Main extends JavaPlugin {
 
-    private ScoreboardManager scoreboardManager;
+    private final ScoreboardManager scoreboardManager = new ScoreboardManager(this);
 
     @Override
     public void onLoad() {

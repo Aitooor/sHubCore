@@ -17,9 +17,13 @@ import static org.bukkit.Bukkit.getServer;
 
 public class ScoreboardManager implements Listener {
 
-    private final Main plugin = Main.getPlugin(Main.class);
+    private Main plugin;
     private final Server getServer = getServer();
     private final Map<UUID, FastBoard> boards = new HashMap<>();
+
+    public ScoreboardManager(Main plugin) {
+        this.plugin = plugin;
+    }
 
     public void load() {
         getServer.getPluginManager().registerEvents(this, plugin);
@@ -40,7 +44,7 @@ public class ScoreboardManager implements Listener {
         Player player = e.getPlayer();
 
         FastBoard board = new FastBoard(player);
-
+        //TODO Add to config file
         board.updateTitle(ChatUtils.translate("&b&lsHub &7#1"));
 
         this.boards.put(player.getUniqueId(), board);
@@ -58,11 +62,12 @@ public class ScoreboardManager implements Listener {
     }
 
     private void updateBoard(FastBoard board) {
+        //TODO Add to config file
         List<String> lines = new ArrayList<>();
         lines.add("");
         lines.add("Players " + getServer().getOnlinePlayers().size());
         lines.add("");
-        lines.add("Kills: " + board.getPlayer().getStatistic(Statistic.PLAYER_KILLS));
+        lines.add("Kills " + board.getPlayer().getStatistic(Statistic.PLAYER_KILLS));
         lines.add("");
 
         board.updateLines(ChatUtils.translate(lines));
