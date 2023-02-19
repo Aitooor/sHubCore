@@ -6,6 +6,9 @@ HubCore for 1.8 to 1.19 Minecraft servers
 ---
 
 ## Features
+- Scoreboard
+
+## TODO
 - Server selector
 - Hub selector
 - Toggle player visibility with item
