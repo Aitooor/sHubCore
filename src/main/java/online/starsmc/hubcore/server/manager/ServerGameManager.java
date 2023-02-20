@@ -7,11 +7,7 @@ import online.starsmc.hubcore.server.ServerModel;
 import online.starsmc.hubcore.user.UserManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.slf4j.Logger;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @SuppressWarnings("rawtypes")
 public class ServerGameManager {
@@ -28,10 +24,6 @@ public class ServerGameManager {
         this.logger = logger;
         this.userManager = userManager;
         this.bungeeManager = bungeeManager;
-    }
-
-    public void getServers(Player player) {
-
     }
 
     @SuppressWarnings("unchecked")
