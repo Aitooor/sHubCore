@@ -1,4 +1,4 @@
-package online.starsmc.hubcore.bungee.manager;
+package online.starsmc.hubcore.bungee;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;

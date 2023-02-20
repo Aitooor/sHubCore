@@ -1,15 +1,16 @@
-package online.starsmc.hubcore.server;
+package online.starsmc.hubcore.server.manager;
 
 import online.starsmc.hubcore.Main;
-import online.starsmc.hubcore.bungee.manager.BungeeManager;
+import online.starsmc.hubcore.bungee.BungeeManager;
 import online.starsmc.hubcore.model.repository.CachedModelRepository;
+import online.starsmc.hubcore.server.ServerModel;
 import online.starsmc.hubcore.user.UserManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.slf4j.Logger;
 
 @SuppressWarnings("rawtypes")
-public class ServerManager {
+public class ServerHubManager {
 
     private final Main plugin;
     private final CachedModelRepository cachedRepository;
@@ -17,7 +18,7 @@ public class ServerManager {
     private final UserManager userManager;
     private final BungeeManager bungeeManager;
 
-    public ServerManager(Main plugin, CachedModelRepository cachedRepository, Logger logger, UserManager userManager, BungeeManager bungeeManager) {
+    public ServerHubManager(Main plugin, CachedModelRepository cachedRepository, Logger logger, UserManager userManager, BungeeManager bungeeManager) {
         this.plugin = plugin;
         this.cachedRepository = cachedRepository;
         this.logger = logger;
