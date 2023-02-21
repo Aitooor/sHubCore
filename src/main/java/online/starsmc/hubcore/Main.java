@@ -12,7 +12,7 @@ import java.util.Set;
 public class Main extends JavaPlugin {
     @Inject
     private Set<Service> services;
-    private final ScoreboardManager scoreboardManager = new ScoreboardManager(this);
+    private final ScoreboardManager scoreboardManager = new ScoreboardManager();
 
     @Override
     public void onLoad() {
