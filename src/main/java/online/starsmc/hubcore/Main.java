@@ -10,9 +10,9 @@ import javax.inject.Inject;
 import java.util.Set;
 
 public class Main extends JavaPlugin {
-    @Inject
-    private Set<Service> services;
-    private final ScoreboardManager scoreboardManager = new ScoreboardManager();
+
+    @Inject private Set<Service> services;
+    @Inject private ScoreboardManager scoreboardManager;
 
     @Override
     public void onLoad() {
