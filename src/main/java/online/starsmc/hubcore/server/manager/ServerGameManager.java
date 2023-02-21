@@ -8,23 +8,17 @@ import online.starsmc.hubcore.user.UserManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.slf4j.Logger;
+import team.unnamed.inject.InjectAll;
 
 @SuppressWarnings("rawtypes")
+@InjectAll
 public class ServerGameManager {
 
-    private final Main plugin;
-    private final CachedModelRepository cachedRepository;
-    private final Logger logger;
-    private final UserManager userManager;
-    private final BungeeManager bungeeManager;
-
-    public ServerGameManager(Main plugin, CachedModelRepository cachedRepository, Logger logger, UserManager userManager, BungeeManager bungeeManager) {
-        this.plugin = plugin;
-        this.cachedRepository = cachedRepository;
-        this.logger = logger;
-        this.userManager = userManager;
-        this.bungeeManager = bungeeManager;
-    }
+    private Main plugin;
+    private CachedModelRepository cachedRepository;
+    private Logger logger;
+    private UserManager userManager;
+    private BungeeManager bungeeManager;
 
     @SuppressWarnings("unchecked")
     public void createServer(CommandSender sender, ServerModel serverModel) {
