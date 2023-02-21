@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface ChatUtils {
+public interface ChatUtil {
 
     static String translate(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);

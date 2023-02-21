@@ -9,12 +9,12 @@ import team.unnamed.inject.InjectAll;
 @InjectAll
 @Command(names = {"hubcore", "sHubCore", "sHubcore", "shubcore", "shubCore"})
 public class MainCommand implements CommandClass {
-    @Command(names = {"reload", "rl"},permission = "hubcore.reload")
+    @Command(names = {"reload", "rl"}, permission = "hubcore.reload")
     public void reloadCommand(@Sender Player player){
         //plugin.reload();
     }
-    @Command(names = "",permission = "hubcore.example")
-    public void commandWithArg(@Sender Player player, String arg){
+    @Command(names = "setspawn", permission = "hubcore.setspawn")
+    public void setSpawn(@Sender Player player, String arg){
         //player.sendMessage(arg);
     }
 }

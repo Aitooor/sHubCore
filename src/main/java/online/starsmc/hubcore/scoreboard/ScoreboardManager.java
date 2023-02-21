@@ -2,7 +2,7 @@ package online.starsmc.hubcore.scoreboard;
 
 import online.starsmc.hubcore.Main;
 import online.starsmc.hubcore.scoreboard.fastboard.FastBoard;
-import online.starsmc.hubcore.utils.ChatUtils;
+import online.starsmc.hubcore.utils.ChatUtil;
 import org.bukkit.Server;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
@@ -45,7 +45,7 @@ public class ScoreboardManager implements Listener {
 
         FastBoard board = new FastBoard(player);
         //TODO Add to config file
-        board.updateTitle(ChatUtils.translate("&b&lsHub &7#1"));
+        board.updateTitle(ChatUtil.translate("&b&lsHub &7#1"));
 
         this.boards.put(player.getUniqueId(), board);
     }
@@ -70,7 +70,7 @@ public class ScoreboardManager implements Listener {
         lines.add("Kills " + board.getPlayer().getStatistic(Statistic.PLAYER_KILLS));
         lines.add("");
 
-        board.updateLines(ChatUtils.translate(lines));
+        board.updateLines(ChatUtil.translate(lines));
     }
 
 }
