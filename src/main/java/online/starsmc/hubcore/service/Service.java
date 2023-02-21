@@ -4,6 +4,5 @@ public interface Service {
 
     void start();
 
-    default void stop() {
-    }
+    void stop();
 }
