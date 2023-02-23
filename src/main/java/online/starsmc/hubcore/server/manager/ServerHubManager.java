@@ -7,7 +7,6 @@ import online.starsmc.hubcore.server.ServerModel;
 import online.starsmc.hubcore.user.UserManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
-import org.slf4j.Logger;
 import team.unnamed.inject.InjectAll;
 
 import java.util.logging.Level;
