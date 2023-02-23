@@ -10,18 +10,20 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import team.unnamed.inject.InjectAll;
 
-import javax.inject.Inject;
 import java.util.*;
 
 import static org.bukkit.Bukkit.getServer;
 
 public class ScoreboardManager implements Listener {
 
-    @Inject private Main plugin;
+    private final Main plugin;
     private final Server getServer = getServer();
     private final Map<UUID, FastBoard> boards = new HashMap<>();
+
+    public ScoreboardManager(Main plugin) {
+        this.plugin = plugin;
+    }
 
     public void load() {
         getServer.getPluginManager().registerEvents(this, plugin);

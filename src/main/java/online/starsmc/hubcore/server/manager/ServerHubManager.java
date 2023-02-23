@@ -10,46 +10,47 @@ import org.bukkit.entity.Entity;
 import org.slf4j.Logger;
 import team.unnamed.inject.InjectAll;
 
+import java.util.logging.Level;
+
 @SuppressWarnings("rawtypes")
 @InjectAll
 public class ServerHubManager {
 
     private Main plugin;
-    private CachedModelRepository cachedRepository;
-    private Logger logger;
+    private CachedModelRepository<ServerModel> serverCachedModelRepository;
     private UserManager userManager;
     private BungeeManager bungeeManager;
 
     @SuppressWarnings("unchecked")
     public void createServer(CommandSender sender, ServerModel serverModel) {
         try {
-            cachedRepository.save(serverModel);
+            serverCachedModelRepository.save(serverModel);
             sender.sendMessage("The server was create correctly");
         } catch (Exception e) {
             sender.sendMessage("Error, server was not created");
-            logger.error("Error, server was not created", e);
+            plugin.getLogger().log(Level.WARNING, "Error, server was not created", e);
         }
     }
 
     @SuppressWarnings("unchecked")
     public void removeServer(CommandSender sender, String id) {
         try {
-            ServerModel serverModel = (ServerModel) cachedRepository.getOrFind(id);
+            ServerModel serverModel = serverCachedModelRepository.getOrFind(id);
             if(serverModel == null) {
                 sender.sendMessage("The server not exist");
                 return;
             }
-            cachedRepository.removeInBoth(serverModel);
+            serverCachedModelRepository.removeInBoth(serverModel);
             sender.sendMessage("The server was removed correctly");
         } catch (Exception e) {
             sender.sendMessage("The server couldn't be removed");
-            logger.error("Error, the server couldn't be removed");
+            plugin.getLogger().log(Level.WARNING, "Error, the server couldn't be removed", e);
         }
     }
 
     public void teleportToServer(Entity entity, String id) {
         try {
-            ServerModel serverModel = (ServerModel) cachedRepository.getOrFindAndCache(id);
+            ServerModel serverModel = serverCachedModelRepository.getOrFindAndCache(id);
 
             if(serverModel == null) {
                 entity.sendMessage("The server not exist");
@@ -64,7 +65,7 @@ public class ServerHubManager {
             bungeeManager.teleportToServer(entity.getUniqueId(), serverModel);
         } catch (Exception e) {
             entity.sendMessage("Error, can't teleport to the server");
-            logger.error("Can't teleport to the server", e);
+            plugin.getLogger().log(Level.WARNING, "Can't teleport to the server", e);
         }
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @Command(names = {"hub", "hubs"}, permission = "hubcore.hub")
 public class HubCommand implements CommandClass {
 
-    @Inject private ServerHubManager serverHubManager;
+    private ServerHubManager serverHubManager;
 
     @Command(names = {"create", "c"})
     public void create(@Sender CommandSender sender, String id){
@@ -28,8 +28,6 @@ public class HubCommand implements CommandClass {
 
         Player player = (Player) sender;
 
-        String name = id;
-        String server = id;
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add("Lore of " + id);
@@ -38,7 +36,7 @@ public class HubCommand implements CommandClass {
 
         serverHubManager.createServer(
                 player,
-                new ServerModel(id, name, server, lore, permission)
+                new ServerModel(id, id, id, lore, permission)
         );
     }
 

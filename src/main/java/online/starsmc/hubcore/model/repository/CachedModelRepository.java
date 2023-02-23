@@ -1,20 +1,15 @@
 package online.starsmc.hubcore.model.repository;
 
 import online.starsmc.hubcore.model.Model;
+import team.unnamed.inject.AbstractModule;
+import team.unnamed.inject.InjectAll;
 
-public class CachedModelRepository<ModelType extends Model>
+@InjectAll
+public class CachedModelRepository<ModelType extends Model> extends AbstractModule
         implements ModelRepository<ModelType> {
 
     private ModelRepository<ModelType> persistentModelRepository;
     private ModelRepository<ModelType> cachedModelRepository;
-
-    public CachedModelRepository(
-            ModelRepository<ModelType> persistentModelRepository,
-            ModelRepository<ModelType> cachedModelRepository
-    ){
-        this.persistentModelRepository = persistentModelRepository;
-        this.cachedModelRepository = cachedModelRepository;
-    }
 
     // Find in persistent
     @Override

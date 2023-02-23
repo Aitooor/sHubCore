@@ -28,8 +28,6 @@ public class ServerCommand implements CommandClass {
 
         Player player = (Player) sender;
 
-        String name = id;
-        String server = id;
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add("Lore of " + id);
@@ -38,7 +36,7 @@ public class ServerCommand implements CommandClass {
 
         serverGameManager.createServer(
                 player,
-                new ServerModel(id, name, server, lore, permission)
+                new ServerModel(id, id, id, lore, permission)
         );
     }
 

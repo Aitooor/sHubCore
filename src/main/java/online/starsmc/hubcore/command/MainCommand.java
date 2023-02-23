@@ -3,6 +3,8 @@ package online.starsmc.hubcore.command;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
+import online.starsmc.hubcore.utils.ChatUtil;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 
@@ -10,11 +12,15 @@ import team.unnamed.inject.InjectAll;
 @Command(names = {"hubcore", "sHubCore", "sHubcore", "shubcore", "shubCore"})
 public class MainCommand implements CommandClass {
     @Command(names = {"reload", "rl"}, permission = "hubcore.reload")
-    public void reloadCommand(@Sender Player player){
-        //plugin.reload();
+    public void reloadCommand(@Sender CommandSender sender){
+        if(!(sender instanceof Player)) {
+            ChatUtil.sendMsgSender(sender, "Need to implement");
+            return;
+        }
+        ChatUtil.sendMsgSender(sender, "Not done yet");
     }
     @Command(names = "setspawn", permission = "hubcore.setspawn")
     public void setSpawn(@Sender Player player, String arg){
-        //player.sendMessage(arg);
+        ChatUtil.sendMsgSender(player, "Not done yet");
     }
 }

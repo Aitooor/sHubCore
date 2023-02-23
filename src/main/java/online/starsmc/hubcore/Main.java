@@ -12,7 +12,7 @@ import java.util.Set;
 public class Main extends JavaPlugin {
 
     @Inject private Set<Service> services;
-    @Inject private ScoreboardManager scoreboardManager;
+    private ScoreboardManager scoreboardManager = new ScoreboardManager(this);
 
     @Override
     public void onLoad() {
@@ -21,9 +21,10 @@ public class Main extends JavaPlugin {
     }
     @Override
     public void onEnable() {
+        this.saveDefaultConfig();
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
-        scoreboardManager.load();
         services.forEach(Service::start);
+        scoreboardManager.load();
     }
 
     @Override
@@ -31,7 +32,7 @@ public class Main extends JavaPlugin {
         //make sure to unregister the registered channels in case of a reload
         this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
         this.getServer().getMessenger().unregisterIncomingPluginChannel(this);
-        scoreboardManager.disable();
         services.forEach(Service::stop);
+        scoreboardManager.disable();
     }
 }

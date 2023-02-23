@@ -7,15 +7,12 @@ import online.starsmc.hubcore.server.ServerModel;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import javax.inject.Inject;
 import java.util.UUID;
 
 public class BungeeManager {
 
-    private final Main plugin;
-
-    public BungeeManager(Main plugin) {
-        this.plugin = plugin;
-    }
+    @Inject private Main plugin;
 
     @SuppressWarnings("UnstableApiUsage")
     public void teleportToServer(UUID uuid, ServerModel serverModel) {

@@ -8,10 +8,10 @@ import java.util.UUID;
 
 public class UserManager {
 
-    @Inject private CachedModelRepository<UserModel> cachedRepository;
+    @Inject private CachedModelRepository<UserModel> usersCachedModelRepository;
 
     public boolean canAccessServer(UUID userId, ServerModel serverModel) throws Exception {
-        UserModel userModel = cachedRepository.getOrFindAndCache(userId.toString());
+        UserModel userModel = usersCachedModelRepository.getOrFindAndCache(userId.toString());
         if(userModel == null) {
             return false;
         }
