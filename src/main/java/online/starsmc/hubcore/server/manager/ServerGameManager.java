@@ -21,6 +21,19 @@ public class ServerGameManager {
     private UserManager userManager;
     private BungeeManager bungeeManager;
 
+    public boolean findServer(CommandSender sender, String id) {
+        try {
+            if(serversCachedModelRepository.getOrFind(id) != null) {
+                return true;
+            }
+        } catch (Exception e) {
+            sender.sendMessage("The hub couldn't be found");
+            plugin.getLogger().log(Level.WARNING, "Error, the hub couldn't be found", e);
+            return false;
+        }
+        return false;
+    }
+
     @SuppressWarnings("unchecked")
     public void createServer(CommandSender sender, ServerModel serverModel) {
         String error = "Error, server was not created";

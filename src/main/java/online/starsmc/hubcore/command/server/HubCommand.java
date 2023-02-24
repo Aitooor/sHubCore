@@ -1,4 +1,4 @@
-package online.starsmc.hubcore.command;
+package online.starsmc.hubcore.command.server;
 
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
@@ -28,6 +28,11 @@ public class HubCommand implements CommandClass {
 
         Player player = (Player) sender;
 
+        if(!serverHubManager.findServer(player, id)) {
+            sender.sendMessage("The server already exist");
+            return;
+        }
+
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add("Lore of " + id);
@@ -49,10 +54,11 @@ public class HubCommand implements CommandClass {
 
         Player player = (Player) sender;
 
-        if(serverHubManager == null) {
+        if(!serverHubManager.findServer(player, id)) {
             player.sendMessage("This server not exist");
             return;
         }
+
         serverHubManager.removeServer(player, id);
     }
 
@@ -65,10 +71,11 @@ public class HubCommand implements CommandClass {
 
         Player player = (Player) sender;
 
-        if(serverHubManager == null) {
+        if(!serverHubManager.findServer(player, id)) {
             player.sendMessage("This server not exist");
             return;
         }
+
         serverHubManager.teleportToServer(player, id);
     }
 }

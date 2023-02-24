@@ -16,14 +16,27 @@ import java.util.logging.Level;
 public class ServerHubManager {
 
     private Main plugin;
-    private CachedModelRepository<ServerModel> serverCachedModelRepository;
+    private CachedModelRepository<ServerModel> serversCachedModelRepository;
     private UserManager userManager;
     private BungeeManager bungeeManager;
+
+    public boolean findServer(CommandSender sender, String id) {
+        try {
+            if(serversCachedModelRepository.getOrFind(id) != null) {
+                return true;
+            }
+        } catch (Exception e) {
+            sender.sendMessage("The hub couldn't be found");
+            plugin.getLogger().log(Level.WARNING, "Error, the hub couldn't be found", e);
+            return false;
+        }
+        return false;
+    }
 
     @SuppressWarnings("unchecked")
     public void createServer(CommandSender sender, ServerModel serverModel) {
         try {
-            serverCachedModelRepository.save(serverModel);
+            serversCachedModelRepository.save(serverModel);
             sender.sendMessage("The server was create correctly");
         } catch (Exception e) {
             sender.sendMessage("Error, server was not created");
@@ -34,12 +47,12 @@ public class ServerHubManager {
     @SuppressWarnings("unchecked")
     public void removeServer(CommandSender sender, String id) {
         try {
-            ServerModel serverModel = serverCachedModelRepository.getOrFind(id);
+            ServerModel serverModel = serversCachedModelRepository.getOrFind(id);
             if(serverModel == null) {
                 sender.sendMessage("The server not exist");
                 return;
             }
-            serverCachedModelRepository.removeInBoth(serverModel);
+            serversCachedModelRepository.removeInBoth(serverModel);
             sender.sendMessage("The server was removed correctly");
         } catch (Exception e) {
             sender.sendMessage("The server couldn't be removed");
@@ -49,7 +62,7 @@ public class ServerHubManager {
 
     public void teleportToServer(Entity entity, String id) {
         try {
-            ServerModel serverModel = serverCachedModelRepository.getOrFindAndCache(id);
+            ServerModel serverModel = serversCachedModelRepository.getOrFindAndCache(id);
 
             if(serverModel == null) {
                 entity.sendMessage("The server not exist");
