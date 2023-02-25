@@ -6,6 +6,7 @@ import online.starsmc.hubcore.scoreboard.fastboard.FastBoard;
 import online.starsmc.hubcore.utils.BukkitConfiguration;
 import online.starsmc.hubcore.utils.ChatUtil;
 import org.bukkit.Server;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,6 +21,7 @@ import static org.bukkit.Bukkit.getServer;
 public class ScoreboardManager implements Listener {
 
     private final Main plugin;
+    private final FileConfiguration config;
     @Named("scoreboard")
     private BukkitConfiguration scoreboard;
     private final Server getServer = getServer();
@@ -27,6 +29,7 @@ public class ScoreboardManager implements Listener {
 
     public ScoreboardManager(Main plugin) {
         this.plugin = plugin;
+        this.config = plugin.getConfig();
         this.scoreboard = new BukkitConfiguration(plugin, "scoreboard");
     }
 
@@ -49,7 +52,10 @@ public class ScoreboardManager implements Listener {
         Player player = e.getPlayer();
 
         FastBoard board = new FastBoard(player);
-        board.updateTitle(ChatUtil.translate(scoreboard.get().getString("title")));
+        board.updateTitle(
+                ChatUtil.translate(scoreboard.get().getString("title")
+                        .replace("%id%", config.getString("hub_id")))
+        );
 
         this.boards.put(player.getUniqueId(), board);
     }
