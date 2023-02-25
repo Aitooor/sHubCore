@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface ChatUtils {
+public interface ChatUtil {
 
     static String translate(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
@@ -41,7 +41,7 @@ public interface ChatUtils {
     }
 
     static void sendMsgSenderPrefix(CommandSender sender, String message) {
-        sendMsgSender(sender, getPrefix() + message);
+        sendMsgSender(sender, getPrefixGame() + message);
     }
 
     static void sendMsgSender(CommandSender sender, List<String> stringList) {

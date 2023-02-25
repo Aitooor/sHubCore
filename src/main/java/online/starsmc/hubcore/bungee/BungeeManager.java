@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class BungeeManager {
 
-    private final Main plugin;
+    private Main plugin;
 
     public BungeeManager(Main plugin) {
         this.plugin = plugin;
