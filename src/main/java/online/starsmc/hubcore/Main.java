@@ -38,7 +38,6 @@ public class Main extends JavaPlugin {
     public void onDisable() {
         //make sure to unregister the registered channels in case of a reload
         this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
-        this.getServer().getMessenger().unregisterIncomingPluginChannel(this);
         services.forEach(Service::stop);
         if(scoreboardConfig.get().getBoolean("enable")) {
             scoreboardManager.disable();
