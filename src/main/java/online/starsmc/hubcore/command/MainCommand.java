@@ -14,10 +14,10 @@ public class MainCommand implements CommandClass {
     @Command(names = {"reload", "rl"}, permission = "hubcore.reload")
     public void reloadCommand(@Sender CommandSender sender){
         if(!(sender instanceof Player)) {
-            ChatUtil.sendMsgSender(sender, "Need to implement");
+            ChatUtil.sendMsgSenderPrefix(sender, "&cNeed to implement");
             return;
         }
-        ChatUtil.sendMsgSender(sender, "Not done yet");
+        ChatUtil.sendMsgSenderPrefix(sender, "&cNot done yet");
     }
     @Command(names = "setspawn", permission = "hubcore.setspawn")
     public void setSpawn(@Sender Player player, String arg){

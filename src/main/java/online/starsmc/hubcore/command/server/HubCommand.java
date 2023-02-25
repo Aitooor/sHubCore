@@ -5,6 +5,7 @@ import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import online.starsmc.hubcore.server.ServerModel;
 import online.starsmc.hubcore.server.manager.ServerHubManager;
+import online.starsmc.hubcore.utils.ChatUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
@@ -21,7 +22,7 @@ public class HubCommand implements CommandClass {
     @Command(names = {"create", "c"})
     public void create(@Sender CommandSender sender, String id){
         if(!(sender instanceof Player)) {
-            sender.sendMessage("This command only can execute in game");
+            ChatUtil.sendMsgSender(sender, "&cThis command only can execute in game");
             return;
         }
 
@@ -41,7 +42,7 @@ public class HubCommand implements CommandClass {
     @Command(names = {"remove", "r"})
     public void remove(@Sender CommandSender sender, String id){
         if(!(sender instanceof Player)) {
-            sender.sendMessage("This command only can execute in game");
+            ChatUtil.sendMsgSender(sender, "&cThis command only can execute in game");
             return;
         }
 
@@ -53,7 +54,7 @@ public class HubCommand implements CommandClass {
     @Command(names = {"teleport", "tp"})
     public void teleport(@Sender CommandSender sender, String id){
         if(!(sender instanceof Player)) {
-            sender.sendMessage("This command only can execute in game");
+            ChatUtil.sendMsgSender(sender, "&cThis command only can execute in game");
             return;
         }
 

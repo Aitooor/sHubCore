@@ -41,7 +41,7 @@ public interface ChatUtil {
     }
 
     static void sendMsgSenderPrefix(CommandSender sender, String message) {
-        sendMsgSender(sender, getPrefix() + message);
+        sendMsgSender(sender, getPrefixGame() + message);
     }
 
     static void sendMsgSender(CommandSender sender, List<String> stringList) {

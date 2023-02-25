@@ -4,7 +4,7 @@ import online.starsmc.hubcore.Main;
 import online.starsmc.hubcore.bungee.BungeeManager;
 import online.starsmc.hubcore.model.repository.CachedModelRepository;
 import online.starsmc.hubcore.server.ServerModel;
-import online.starsmc.hubcore.user.UserManager;
+import online.starsmc.hubcore.utils.ChatUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 
@@ -15,13 +15,11 @@ public class ServerHubManager {
 
     private final Main plugin;
     private final CachedModelRepository<ServerModel> serversCachedModelRepository;
-    private final UserManager userManager;
     private final BungeeManager bungeeManager;
 
-    public ServerHubManager(Main plugin, CachedModelRepository<ServerModel> serversCachedModelRepository, UserManager userManager, BungeeManager bungeeManager) {
+    public ServerHubManager(Main plugin, CachedModelRepository<ServerModel> serversCachedModelRepository, BungeeManager bungeeManager) {
         this.plugin = plugin;
         this.serversCachedModelRepository = serversCachedModelRepository;
-        this.userManager = userManager;
         this.bungeeManager = bungeeManager;
     }
 
@@ -29,9 +27,9 @@ public class ServerHubManager {
     public void createServer(CommandSender sender, ServerModel serverModel) {
         try {
             serversCachedModelRepository.saveInBoth(serverModel);
-            sender.sendMessage("The server was create correctly");
+            ChatUtil.sendMsgSenderPrefix(sender, "&aThe server was create correctly");
         } catch (Exception e) {
-            sender.sendMessage("Error, server was not created");
+            ChatUtil.sendMsgSenderPrefix(sender, "&cError, server was not created");
             plugin.getLogger().log(Level.WARNING, "Error, server was not created", e);
         }
     }
@@ -41,13 +39,13 @@ public class ServerHubManager {
         try {
             ServerModel serverModel = serversCachedModelRepository.getOrFind(id);
             if(serverModel == null) {
-                sender.sendMessage("The server not exist");
+                ChatUtil.sendMsgSenderPrefix(sender, "&cThe server not exist");
                 return;
             }
             serversCachedModelRepository.removeInBoth(serverModel);
-            sender.sendMessage("The server was removed correctly");
+            ChatUtil.sendMsgSenderPrefix(sender, "&aThe server was removed correctly");
         } catch (Exception e) {
-            sender.sendMessage("The server couldn't be removed");
+            ChatUtil.sendMsgSenderPrefix(sender, "&cThe server couldn't be removed");
             plugin.getLogger().log(Level.WARNING, "Error, the server couldn't be removed", e);
         }
     }
@@ -58,11 +56,6 @@ public class ServerHubManager {
 
             if(serverModel == null) {
                 entity.sendMessage("The server not exist");
-                return;
-            }
-
-            if(!userManager.canAccessServer(entity.getUniqueId(), serverModel)){
-                entity.sendMessage("You can't access to the server");
                 return;
             }
 
