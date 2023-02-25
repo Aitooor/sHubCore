@@ -1,16 +1,18 @@
 package online.starsmc.hubcore.scoreboard;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import online.starsmc.hubcore.Main;
 import online.starsmc.hubcore.scoreboard.fastboard.FastBoard;
+import online.starsmc.hubcore.utils.BukkitConfiguration;
 import online.starsmc.hubcore.utils.ChatUtil;
 import org.bukkit.Server;
-import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import javax.inject.Named;
 import java.util.*;
 
 import static org.bukkit.Bukkit.getServer;
@@ -18,11 +20,14 @@ import static org.bukkit.Bukkit.getServer;
 public class ScoreboardManager implements Listener {
 
     private final Main plugin;
+    @Named("scoreboard")
+    private BukkitConfiguration scoreboard;
     private final Server getServer = getServer();
     private final Map<UUID, FastBoard> boards = new HashMap<>();
 
     public ScoreboardManager(Main plugin) {
         this.plugin = plugin;
+        this.scoreboard = new BukkitConfiguration(plugin, "scoreboard");
     }
 
     public void load() {
@@ -44,8 +49,7 @@ public class ScoreboardManager implements Listener {
         Player player = e.getPlayer();
 
         FastBoard board = new FastBoard(player);
-        //TODO Add to config file
-        board.updateTitle(ChatUtil.translate("&b&lsHub &7#1"));
+        board.updateTitle(ChatUtil.translate(scoreboard.get().getString("title")));
 
         this.boards.put(player.getUniqueId(), board);
     }
@@ -62,15 +66,9 @@ public class ScoreboardManager implements Listener {
     }
 
     private void updateBoard(FastBoard board) {
-        //TODO Add to config file
-        List<String> lines = new ArrayList<>();
-        lines.add("");
-        lines.add("Players " + getServer().getOnlinePlayers().size());
-        lines.add("");
-        lines.add("Kills " + board.getPlayer().getStatistic(Statistic.PLAYER_KILLS));
-        lines.add("");
-
-        board.updateLines(ChatUtil.translate(lines));
+        board.updateLines(ChatUtil.translate(PlaceholderAPI.setPlaceholders(
+            board.getPlayer(), scoreboard.get().getStringList("lines")
+        )));
     }
 
 }

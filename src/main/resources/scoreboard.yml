@@ -1,0 +1,8 @@
+title: "&b&lsHub &7#1"
+lines:
+  - ""
+  - "&fName &a%player_name%"
+  - ""
+  - "&fRank &a%vault_prefix%"
+  - ""
+  - "&bshub.plugin"

@@ -13,7 +13,9 @@ import online.starsmc.hubcore.server.codec.ServerJsonCodec;
 import online.starsmc.hubcore.server.manager.ServerGameManager;
 import online.starsmc.hubcore.server.manager.ServerHubManager;
 import online.starsmc.hubcore.service.CommandService;
+import online.starsmc.hubcore.service.ConfigurationService;
 import online.starsmc.hubcore.service.Service;
+import online.starsmc.hubcore.utils.BukkitConfiguration;
 import team.unnamed.inject.AbstractModule;
 
 import java.io.File;
@@ -68,7 +70,14 @@ public class PluginModule extends AbstractModule {
             bind(ServerGameManager.class).toInstance(serverGameManager);
             bind(BungeeManager.class).toInstance(bungeeManager);
 
-            multibind(Service.class).asSet().to(CommandService.class);
+            multibind(Service.class)
+                    .asSet()
+                    .to(ConfigurationService.class)
+                    .to(CommandService.class);
+
+            bind(BukkitConfiguration.class)
+                    .named("scoreboard")
+                    .toInstance(new BukkitConfiguration(plugin, "scoreboard"));
 
             install(new CommandModule());
         }
