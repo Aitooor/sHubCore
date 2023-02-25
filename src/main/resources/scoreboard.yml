@@ -1,8 +1,11 @@
+enable: true
 title: "&b&lsHub &7#%id%"
 lines:
   - ""
   - "&fName &a%player_name%"
   - ""
   - "&fRank &a%vault_prefix%"
+  - ""
+  - "&fOnline &a%server_online%"
   - ""
   - "&bshub.plugin"
