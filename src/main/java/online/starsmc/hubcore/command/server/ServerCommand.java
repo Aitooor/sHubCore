@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,20 +27,14 @@ public class ServerCommand implements CommandClass {
 
         Player player = (Player) sender;
 
-        if(serverGameManager.findServer(player, id)) {
-            player.sendMessage("The server already exist");
-            return;
-        }
-
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add("Lore of " + id);
         lore.add("");
-        String permission = "hubcore.server." + id;
 
         serverGameManager.createServer(
                 player,
-                new ServerModel(id, id, id, lore, permission)
+                new ServerModel(id, id, id, lore, null)
         );
     }
 
@@ -54,11 +47,6 @@ public class ServerCommand implements CommandClass {
 
         Player player = (Player) sender;
 
-        if(!serverGameManager.findServer(player, id)) {
-            player.sendMessage("This server not exist");
-            return;
-        }
-
         serverGameManager.removeServer(player, id);
     }
 
@@ -70,11 +58,6 @@ public class ServerCommand implements CommandClass {
         }
 
         Player player = (Player) sender;
-
-        if(!serverGameManager.findServer(player, id)) {
-            player.sendMessage("This server not exist");
-            return;
-        }
 
         serverGameManager.teleportToServer(player, id);
     }

@@ -7,38 +7,29 @@ import online.starsmc.hubcore.server.ServerModel;
 import online.starsmc.hubcore.user.UserManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
-import team.unnamed.inject.InjectAll;
 
 import java.util.logging.Level;
 
 
 @SuppressWarnings("rawtypes")
-@InjectAll
 public class ServerGameManager {
 
-    private Main plugin;
-    private CachedModelRepository<ServerModel> serversCachedModelRepository;
-    private UserManager userManager;
-    private BungeeManager bungeeManager;
+    private final Main plugin;
+    private final CachedModelRepository<ServerModel> serverCachedModelRepository;
+    private final UserManager userManager;
+    private final BungeeManager bungeeManager;
 
-    public boolean findServer(CommandSender sender, String id) {
-        try {
-            if(serversCachedModelRepository.getOrFind(id) != null) {
-                return true;
-            }
-        } catch (Exception e) {
-            sender.sendMessage("The hub couldn't be found");
-            plugin.getLogger().log(Level.WARNING, "Error, the hub couldn't be found", e);
-            return false;
-        }
-        return false;
+    public ServerGameManager(Main plugin, CachedModelRepository<ServerModel> serverCachedModelRepository, UserManager userManager, BungeeManager bungeeManager) {
+        this.plugin = plugin;
+        this.serverCachedModelRepository = serverCachedModelRepository;
+        this.userManager = userManager;
+        this.bungeeManager = bungeeManager;
     }
 
     @SuppressWarnings("unchecked")
     public void createServer(CommandSender sender, ServerModel serverModel) {
-        String error = "Error, server was not created";
         try {
-            serversCachedModelRepository.save(serverModel);
+            serverCachedModelRepository.saveInBoth(serverModel);
             sender.sendMessage("The server was create correctly");
         } catch (Exception e) {
             sender.sendMessage("Error, server was not created");
@@ -49,12 +40,12 @@ public class ServerGameManager {
     @SuppressWarnings("unchecked")
     public void removeServer(CommandSender sender, String id) {
         try {
-            ServerModel serverModel = serversCachedModelRepository.getOrFind(id);
+            ServerModel serverModel = serverCachedModelRepository.getOrFind(id);
             if(serverModel == null) {
                 sender.sendMessage("The server not exist");
                 return;
             }
-            serversCachedModelRepository.removeInBoth(serverModel);
+            serverCachedModelRepository.removeInBoth(serverModel);
             sender.sendMessage("The server was removed correctly");
         } catch (Exception e) {
             sender.sendMessage("The server couldn't be removed");
@@ -64,7 +55,7 @@ public class ServerGameManager {
 
     public void teleportToServer(Entity entity, String id) {
         try {
-            ServerModel serverModel = serversCachedModelRepository.getOrFindAndCache(id);
+            ServerModel serverModel = serverCachedModelRepository.getOrFindAndCache(id);
 
             if(serverModel == null) {
                 entity.sendMessage("The server not exist");

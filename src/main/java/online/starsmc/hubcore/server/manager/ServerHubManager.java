@@ -7,36 +7,28 @@ import online.starsmc.hubcore.server.ServerModel;
 import online.starsmc.hubcore.user.UserManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
-import team.unnamed.inject.InjectAll;
 
 import java.util.logging.Level;
 
 @SuppressWarnings("rawtypes")
-@InjectAll
 public class ServerHubManager {
 
-    private Main plugin;
-    private CachedModelRepository<ServerModel> serversCachedModelRepository;
-    private UserManager userManager;
-    private BungeeManager bungeeManager;
+    private final Main plugin;
+    private final CachedModelRepository<ServerModel> serversCachedModelRepository;
+    private final UserManager userManager;
+    private final BungeeManager bungeeManager;
 
-    public boolean findServer(CommandSender sender, String id) {
-        try {
-            if(serversCachedModelRepository.getOrFind(id) != null) {
-                return true;
-            }
-        } catch (Exception e) {
-            sender.sendMessage("The hub couldn't be found");
-            plugin.getLogger().log(Level.WARNING, "Error, the hub couldn't be found", e);
-            return false;
-        }
-        return false;
+    public ServerHubManager(Main plugin, CachedModelRepository<ServerModel> serversCachedModelRepository, UserManager userManager, BungeeManager bungeeManager) {
+        this.plugin = plugin;
+        this.serversCachedModelRepository = serversCachedModelRepository;
+        this.userManager = userManager;
+        this.bungeeManager = bungeeManager;
     }
 
     @SuppressWarnings("unchecked")
     public void createServer(CommandSender sender, ServerModel serverModel) {
         try {
-            serversCachedModelRepository.save(serverModel);
+            serversCachedModelRepository.saveInBoth(serverModel);
             sender.sendMessage("The server was create correctly");
         } catch (Exception e) {
             sender.sendMessage("Error, server was not created");
