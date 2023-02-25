@@ -1,0 +1,6 @@
+# The name uses to detect in witch hub you are
+hub_id: Hub-1
+
+# DON'T CHANGE
+spawn_location: world;0.0;0.0;0.0;0.0;0.0
+# DON'T CHANGE
