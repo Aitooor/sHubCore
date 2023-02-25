@@ -31,12 +31,12 @@ public class MainCommand implements CommandClass {
         plugin.saveConfig();
         plugin.reloadConfig();
 
-        ChatUtil.sendMsgSender(player, "&aSpawn correctly set");
+        ChatUtil.sendMsgPlayerPrefix(player, "&aSpawn correctly set");
     }
 
     @Command(names = "spawn", permission = "hubcore.spawn")
     public void spawn(@Sender Player player) {
         player.teleport(LocationCodec.deserialize(plugin.getConfig().getString("spawn_location")));
-        ChatUtil.sendMsgSender(player, "&aTeleported to spawn");
+        ChatUtil.sendMsgPlayerPrefix(player, "&aTeleported to spawn");
     }
 }
