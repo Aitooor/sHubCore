@@ -1,4 +1,4 @@
-sHubCore
+sHubCore [Dev]
 ============
 
 HubCore for 1.8 to 1.19 Minecraft servers
@@ -6,7 +6,8 @@ HubCore for 1.8 to 1.19 Minecraft servers
 ---
 
 ## Features
-- Scoreboard
+- Chat in config
+- Scoreboard with config
 
 ## TODO
 - Server selector
