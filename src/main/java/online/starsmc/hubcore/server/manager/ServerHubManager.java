@@ -10,7 +10,6 @@ import org.bukkit.entity.Entity;
 
 import java.util.logging.Level;
 
-@SuppressWarnings("rawtypes")
 public class ServerHubManager {
 
     private final Main plugin;
