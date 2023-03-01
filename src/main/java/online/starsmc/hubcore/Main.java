@@ -1,5 +1,7 @@
 package online.starsmc.hubcore;
 
+import online.starsmc.hubcore.listener.ChatListener;
+import online.starsmc.hubcore.listener.PlayerListeners;
 import online.starsmc.hubcore.module.PluginModule;
 import online.starsmc.hubcore.scoreboard.ScoreboardManager;
 import online.starsmc.hubcore.service.Service;
@@ -17,7 +19,7 @@ public class Main extends JavaPlugin {
     @Inject
     @Named("scoreboard")
     private BukkitConfiguration scoreboardConfig;
-    private ScoreboardManager scoreboardManager = new ScoreboardManager(this);
+    private final ScoreboardManager scoreboardManager = new ScoreboardManager(this);
 
     @Override
     public void onLoad() {
@@ -32,6 +34,8 @@ public class Main extends JavaPlugin {
         if(scoreboardConfig.get().getBoolean("enable")) {
             scoreboardManager.load();
         }
+        this.getServer().getPluginManager().registerEvents(new PlayerListeners(this), this);
+        this.getServer().getPluginManager().registerEvents(new ChatListener(this), this);
     }
 
     @Override
