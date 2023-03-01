@@ -8,8 +8,8 @@ HubCore for 1.8 to 1.19 Minecraft servers
 ## Features
 - Chat in config
 - Scoreboard with config
-- Set spawn for player join (Accessible from admin commands)
-- Create/Remove/Teleport server and hubs command
+- Set spawn for player (Accessible from admin commands)
+- Create/Remove/Teleport server and hubs commands (Saved in JSON)
 
 ## TODO
 - Server selector
