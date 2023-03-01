@@ -1,4 +1,4 @@
-package online.starsmc.hubcore.utils.codec;
+package online.starsmc.hubcore.utils.location;
 
 import online.starsmc.hubcore.Main;
 import org.bukkit.Bukkit;
