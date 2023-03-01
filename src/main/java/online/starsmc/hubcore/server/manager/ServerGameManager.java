@@ -24,6 +24,7 @@ public class ServerGameManager {
     }
 
     public void createServer(CommandSender sender, ServerModel serverModel) {
+        //TODO Need to implement if server exist logic
         try {
             serverCachedModelRepository.saveInBoth(serverModel);
             ChatUtil.sendMsgSenderPrefix(sender, "&aThe server was create correctly");
