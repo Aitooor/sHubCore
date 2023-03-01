@@ -32,7 +32,6 @@ dependencies {
 
     implementation("team.unnamed:inject:1.0.1")
     implementation("me.fixeddev:commandflow-bukkit:0.5.2")
-    implementation("io.github.rysefoxx.inventory:RyseInventory-Plugin:1.5.7")
 }
 
 tasks {
