@@ -11,7 +11,6 @@ import org.bukkit.entity.Entity;
 import java.util.logging.Level;
 
 
-@SuppressWarnings("rawtypes")
 public class ServerGameManager {
 
     private final Main plugin;
@@ -24,7 +23,6 @@ public class ServerGameManager {
         this.bungeeManager = bungeeManager;
     }
 
-    @SuppressWarnings("unchecked")
     public void createServer(CommandSender sender, ServerModel serverModel) {
         try {
             serverCachedModelRepository.saveInBoth(serverModel);
@@ -35,7 +33,6 @@ public class ServerGameManager {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void removeServer(CommandSender sender, String id) {
         try {
             ServerModel serverModel = serverCachedModelRepository.getOrFind(id);

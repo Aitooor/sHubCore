@@ -23,7 +23,6 @@ public class ServerHubManager {
         this.bungeeManager = bungeeManager;
     }
 
-    @SuppressWarnings("unchecked")
     public void createServer(CommandSender sender, ServerModel serverModel) {
         try {
             serversCachedModelRepository.saveInBoth(serverModel);
@@ -34,7 +33,6 @@ public class ServerHubManager {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void removeServer(CommandSender sender, String id) {
         try {
             ServerModel serverModel = serversCachedModelRepository.getOrFind(id);
