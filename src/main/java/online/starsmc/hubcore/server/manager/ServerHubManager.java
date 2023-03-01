@@ -10,7 +10,6 @@ import org.bukkit.entity.Entity;
 
 import java.util.logging.Level;
 
-@SuppressWarnings("rawtypes")
 public class ServerHubManager {
 
     private final Main plugin;
@@ -23,8 +22,11 @@ public class ServerHubManager {
         this.bungeeManager = bungeeManager;
     }
 
-    @SuppressWarnings("unchecked")
     public void createServer(CommandSender sender, ServerModel serverModel) {
+        if(serverModel != null) {
+            ChatUtil.sendMsgSenderPrefix(sender, "&cThe server already exist");
+            return;
+        }
         try {
             serversCachedModelRepository.saveInBoth(serverModel);
             ChatUtil.sendMsgSenderPrefix(sender, "&aThe server was create correctly");
@@ -34,7 +36,6 @@ public class ServerHubManager {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void removeServer(CommandSender sender, String id) {
         try {
             ServerModel serverModel = serversCachedModelRepository.getOrFind(id);
