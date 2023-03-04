@@ -35,7 +35,7 @@ public class ServerCommand implements CommandClass {
 
         serverGameManager.createServer(
                 player,
-                new ServerModel(id, id, id, lore, null)
+                new ServerModel(id, id, lore, id, null)
         );
     }
 
