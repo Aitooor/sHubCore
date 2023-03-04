@@ -13,19 +13,24 @@ import java.util.logging.Level;
 public class ServerHubManager {
 
     private final Main plugin;
-    private final CachedModelRepository<ServerModel> serversCachedModelRepository;
+    private final CachedModelRepository<ServerModel> serverCachedModelRepository;
     private final BungeeManager bungeeManager;
 
-    public ServerHubManager(Main plugin, CachedModelRepository<ServerModel> serversCachedModelRepository, BungeeManager bungeeManager) {
+    public ServerHubManager(Main plugin, CachedModelRepository<ServerModel> serverCachedModelRepository, BungeeManager bungeeManager) {
         this.plugin = plugin;
-        this.serversCachedModelRepository = serversCachedModelRepository;
+        this.serverCachedModelRepository = serverCachedModelRepository;
         this.bungeeManager = bungeeManager;
     }
 
     public void createServer(CommandSender sender, ServerModel serverModel) {
         //TODO Need to implement if server exist logic
         try {
-            serversCachedModelRepository.saveInBoth(serverModel);
+            ServerModel findServerModel = serverCachedModelRepository.getOrFind(serverModel.getId());
+            if(findServerModel != null) {
+                ChatUtil.sendMsgSenderPrefix(sender, "&cThe server already exist");
+                return;
+            }
+            serverCachedModelRepository.saveInBoth(serverModel);
             ChatUtil.sendMsgSenderPrefix(sender, "&aThe server was create correctly");
         } catch (Exception e) {
             ChatUtil.sendMsgSenderPrefix(sender, "&cError, server was not created");
@@ -35,12 +40,12 @@ public class ServerHubManager {
 
     public void removeServer(CommandSender sender, String id) {
         try {
-            ServerModel serverModel = serversCachedModelRepository.getOrFind(id);
+            ServerModel serverModel = serverCachedModelRepository.getOrFind(id);
             if(serverModel == null) {
                 ChatUtil.sendMsgSenderPrefix(sender, "&cThe server not exist");
                 return;
             }
-            serversCachedModelRepository.removeInBoth(serverModel);
+            serverCachedModelRepository.removeInBoth(serverModel);
             ChatUtil.sendMsgSenderPrefix(sender, "&aThe server was removed correctly");
         } catch (Exception e) {
             ChatUtil.sendMsgSenderPrefix(sender, "&cThe server couldn't be removed");
@@ -50,7 +55,7 @@ public class ServerHubManager {
 
     public void teleportToServer(Entity entity, String id) {
         try {
-            ServerModel serverModel = serversCachedModelRepository.getOrFindAndCache(id);
+            ServerModel serverModel = serverCachedModelRepository.getOrFindAndCache(id);
 
             if(serverModel == null) {
                 entity.sendMessage("The server not exist");

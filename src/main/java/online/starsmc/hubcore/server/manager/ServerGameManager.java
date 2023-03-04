@@ -26,6 +26,11 @@ public class ServerGameManager {
     public void createServer(CommandSender sender, ServerModel serverModel) {
         //TODO Need to implement if server exist logic
         try {
+            ServerModel findServerModel = serverCachedModelRepository.getOrFind(serverModel.getId());
+            if(findServerModel != null) {
+                ChatUtil.sendMsgSenderPrefix(sender, "&cThe server already exist");
+                return;
+            }
             serverCachedModelRepository.saveInBoth(serverModel);
             ChatUtil.sendMsgSenderPrefix(sender, "&aThe server was create correctly");
         } catch (Exception e) {
