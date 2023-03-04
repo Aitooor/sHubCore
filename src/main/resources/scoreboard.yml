@@ -1,11 +1,13 @@
 enable: true
-title: "&b&lsHub &7#%id%"
+# %id% -> "hub_id" configured in config.yml || %id_name% -> "hud_name" configured in config.yml
+title: '&b&lsHub &7#%id%'
+# PlaceholderAPI support
 lines:
-  - ""
-  - "&fName &a%player_name%"
-  - ""
-  - "&fRank &a%vault_prefix%"
-  - ""
-  - "&fOnline &a%server_online%"
-  - ""
-  - "&bshub.plugin"
+  - ''
+  - '          &fYou can add'
+  - '      &fthe lines you need'
+  - ''
+  - ' &aYou can use placeholders'
+  - '    &afrom PlaceholderAPI'
+  - ''
+  - '           &bshub.plugin'

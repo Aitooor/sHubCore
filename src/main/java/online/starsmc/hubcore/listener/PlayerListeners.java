@@ -1,7 +1,10 @@
 package online.starsmc.hubcore.listener;
 
+import online.starsmc.hubcore.Main;
+import online.starsmc.hubcore.utils.location.LocationCodec;
 import org.bukkit.GameRule;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
@@ -14,7 +17,15 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.world.WorldLoadEvent;
 
+import java.util.Objects;
+
 public class PlayerListeners implements Listener {
+
+    private final FileConfiguration config;
+
+    public PlayerListeners(Main plugin) {
+        this.config = plugin.getConfig();
+    }
 
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
@@ -22,7 +33,7 @@ public class PlayerListeners implements Listener {
 
         event.setJoinMessage(null);
 
-        player.teleport(player.getLocation()); //Change to spawn point
+        player.teleport(Objects.requireNonNull(LocationCodec.deserialize(Objects.requireNonNull(config.getString("spawn_location")))));
     }
 
     @EventHandler
@@ -34,7 +45,7 @@ public class PlayerListeners implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         if(player.getLocation().getY() < 0) {
-            player.teleport(player.getLocation()); //Change to spawn point
+            player.teleport(Objects.requireNonNull(LocationCodec.deserialize(Objects.requireNonNull(config.getString("spawn_location")))));
         }
     }
 

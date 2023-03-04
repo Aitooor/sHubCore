@@ -35,7 +35,7 @@ public class HubCommand implements CommandClass {
 
         serverHubManager.createServer(
                 player,
-                new ServerModel(id, id, id, lore, null)
+                new ServerModel(id, id, lore, id, null)
         );
     }
 

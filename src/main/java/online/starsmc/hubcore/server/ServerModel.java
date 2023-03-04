@@ -7,16 +7,16 @@ import java.util.List;
 public class ServerModel implements Model {
 
     private final String id;
-    private String server;
-    private String permission;
     private String name;
     private List<String> lore;
+    private String server;
+    private String permission;
 
-    public ServerModel(String id, String name, String server, List<String> lore, String permission) {
+    public ServerModel(String id, String name, List<String> lore, String server, String permission) {
         this.id = id;
-        this.server = server;
-        this.name = name;
         this.lore = lore;
+        this.name = name;
+        this.server = server;
         this.permission = permission;
     }
 

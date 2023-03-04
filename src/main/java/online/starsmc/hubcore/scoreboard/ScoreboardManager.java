@@ -53,8 +53,9 @@ public class ScoreboardManager implements Listener {
 
         FastBoard board = new FastBoard(player);
         board.updateTitle(
-                ChatUtil.translate(scoreboard.get().getString("title")
-                        .replace("%id%", config.getString("hub_id")))
+                ChatUtil.translate(Objects.requireNonNull(scoreboard.get().getString("title"))
+                        .replace("%id%", Objects.requireNonNull(config.getString("hub_id")))
+                )
         );
 
         this.boards.put(player.getUniqueId(), board);

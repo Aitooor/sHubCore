@@ -6,14 +6,11 @@ import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import online.starsmc.hubcore.Main;
 import online.starsmc.hubcore.utils.BukkitConfiguration;
 import online.starsmc.hubcore.utils.ChatUtil;
-import online.starsmc.hubcore.utils.codec.LocationCodec;
-import org.bukkit.Location;
+import online.starsmc.hubcore.utils.location.LocationCodec;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
 @InjectAll

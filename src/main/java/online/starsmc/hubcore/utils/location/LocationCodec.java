@@ -1,19 +1,9 @@
-package online.starsmc.hubcore.utils.codec;
+package online.starsmc.hubcore.utils.location;
 
-import online.starsmc.hubcore.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.configuration.file.FileConfiguration;
 
 public class LocationCodec {
-
-    private final Main plugin;
-    private final FileConfiguration config;
-
-    public LocationCodec(Main plugin) {
-        this.plugin = plugin;
-        this.config = plugin.getConfig();
-    }
 
     public static String serialize(Location location) {
         return location.getWorld().getName() + ";"

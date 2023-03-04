@@ -4,46 +4,65 @@ import online.starsmc.hubcore.model.Model;
 import online.starsmc.hubcore.model.YamlCodec;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class YamlModelRepository<ModelType extends Model>
         implements ModelRepository<ModelType> {
 
-    private final File folder;
+    private final Path folderPath;
     private final YamlCodec<ModelType> yamlCodec;
 
-    public YamlModelRepository(File folder, YamlCodec<ModelType> yamlCodec) {
-        this.folder = folder;
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public YamlModelRepository(Path folderPath, YamlCodec<ModelType> yamlCodec) {
+        if(Files.notExists(folderPath)) {
+            try {
+                Files.createDirectories(folderPath);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        this.folderPath = folderPath;
         this.yamlCodec = yamlCodec;
     }
 
 
     @Override
-    public ModelType find(String id) {
-        File modelFile = new File(folder, id + ".yml");
-        if(!modelFile.exists()) return null;
+    public ModelType find(String id) throws IOException {
+        Path modelPath = this.folderPath.resolve(id + ".yml");
+        if(Files.notExists(modelPath)) {
+            return null;
+        }
 
-        YamlConfiguration modelYaml = YamlConfiguration.loadConfiguration(modelFile);
+        try (BufferedReader bufferedReader = Files.newBufferedReader(modelPath)) {
+            YamlConfiguration modelYaml = YamlConfiguration.loadConfiguration(bufferedReader);
+            return yamlCodec.deserialize(modelYaml.getValues(true));
+        }
 
-        return yamlCodec.deserialize(modelYaml.getValues(true));
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void save(ModelType model) throws IOException {
-        File modelFile = new File(folder, model.getId() + ".yml");
-        if(!modelFile.exists()) modelFile.createNewFile();
-
         YamlConfiguration modelYaml = new YamlConfiguration();
         modelYaml.addDefaults(yamlCodec.serialize(model));
-        modelYaml.save(modelFile);
+        modelYaml.options().copyDefaults(true);
+        try (BufferedWriter bufferedWriter = Files.newBufferedWriter(this.folderPath.resolve(model.getId() + ".yml"))) {
+            String data = modelYaml.saveToString();
+            bufferedWriter.write(data);
+        }
     }
 
     @Override
-    public void remove(ModelType model) {
-        File modelFile = new File(folder, model.getId() + ".yml");
-        if (!modelFile.exists()) return;
+    public void remove(ModelType model) throws IOException {
+        Files.delete(this.folderPath.resolve(model.getId() + ".yml"));
+    }
 
-        modelFile.delete();
+    public boolean equals(Object object) {
+
+        return true;
     }
 }

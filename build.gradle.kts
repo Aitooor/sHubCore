@@ -22,8 +22,9 @@ bukkit {
 repositories {
     mavenCentral()
     maven("https://papermc.io/repo/repository/maven-public/")
-    maven("https://repo.unnamed.team/repository/unnamed-public/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
+    maven("https://repo.unnamed.team/repository/unnamed-public/")
+    maven("https://s01.oss.sonatype.org/content/groups/public/")
 }
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT")

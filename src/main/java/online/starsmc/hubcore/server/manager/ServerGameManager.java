@@ -11,7 +11,6 @@ import org.bukkit.entity.Entity;
 import java.util.logging.Level;
 
 
-@SuppressWarnings("rawtypes")
 public class ServerGameManager {
 
     private final Main plugin;
@@ -24,9 +23,14 @@ public class ServerGameManager {
         this.bungeeManager = bungeeManager;
     }
 
-    @SuppressWarnings("unchecked")
     public void createServer(CommandSender sender, ServerModel serverModel) {
+        //TODO Need to implement if server exist logic
         try {
+            ServerModel findServerModel = serverCachedModelRepository.getOrFind(serverModel.getId());
+            if(findServerModel != null) {
+                ChatUtil.sendMsgSenderPrefix(sender, "&cThe server already exist");
+                return;
+            }
             serverCachedModelRepository.saveInBoth(serverModel);
             ChatUtil.sendMsgSenderPrefix(sender, "&aThe server was create correctly");
         } catch (Exception e) {
@@ -35,7 +39,6 @@ public class ServerGameManager {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public void removeServer(CommandSender sender, String id) {
         try {
             ServerModel serverModel = serverCachedModelRepository.getOrFind(id);
