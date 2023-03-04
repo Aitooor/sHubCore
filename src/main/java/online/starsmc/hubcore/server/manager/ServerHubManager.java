@@ -23,7 +23,6 @@ public class ServerHubManager {
     }
 
     public void createServer(CommandSender sender, ServerModel serverModel) {
-        //TODO Need to implement if server exist logic
         try {
             ServerModel findServerModel = serverCachedModelRepository.getOrFind(serverModel.getId());
             if(findServerModel != null) {
