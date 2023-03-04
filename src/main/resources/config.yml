@@ -1,9 +1,10 @@
-# The name uses to detect in witch hub you are
+# The id uses to detect in witch hub you are
 hub_id: 1
+# The hub name || %id% -> Configured in "hub_id"
 hud_name: Hub-%id%
 
 # %player% -> Player display name || %message% -> Player send message
-chat_format: "&f%player%&7: &f%message%"
+chat_format: '&f%player%&7: &f%message%'
 
 # DON'T CHANGE
 spawn_location: world;0.0;0.0;0.0;0.0;0.0
