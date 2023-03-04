@@ -1,15 +1,13 @@
 package online.starsmc.hubcore.module;
 
 import com.google.common.cache.CacheBuilder;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import online.starsmc.hubcore.Main;
 import online.starsmc.hubcore.bungee.BungeeManager;
 import online.starsmc.hubcore.model.repository.CachedModelRepository;
 import online.starsmc.hubcore.model.repository.GuavaModelRepository;
-import online.starsmc.hubcore.model.repository.JsonModelRepository;
+import online.starsmc.hubcore.model.repository.YamlModelRepository;
 import online.starsmc.hubcore.server.ServerModel;
-import online.starsmc.hubcore.server.codec.ServerJsonCodec;
+import online.starsmc.hubcore.server.codec.ServerYamlCodec;
 import online.starsmc.hubcore.server.manager.ServerGameManager;
 import online.starsmc.hubcore.server.manager.ServerHubManager;
 import online.starsmc.hubcore.service.CommandService;
@@ -33,13 +31,10 @@ public class PluginModule extends AbstractModule {
         public PluginModule(Main plugin) {
             File pluginFolder = plugin.getDataFolder();
             Path pluginPath = pluginFolder.toPath();
-            Gson createGson = new GsonBuilder()
-                    .registerTypeAdapter(ServerModel.class, new ServerJsonCodec())
-                    .create();
 
             this.plugin = plugin;
             this.serverCachedModelRepository = new CachedModelRepository<>(
-                    new JsonModelRepository<>(pluginPath.resolve("servers"), ServerModel.class, createGson),
+                    new YamlModelRepository<>(pluginPath.resolve("servers"), new ServerYamlCodec()),
                     new GuavaModelRepository<>(
                             CacheBuilder.newBuilder()
                                     .expireAfterAccess(10, TimeUnit.MINUTES)
@@ -48,7 +43,7 @@ public class PluginModule extends AbstractModule {
                     )
             );
             this.hubCachedModelRepository = new CachedModelRepository<>(
-                    new JsonModelRepository<>(pluginPath.resolve("hubs"), ServerModel.class, createGson),
+                    new YamlModelRepository<>(pluginPath.resolve("hubs"), new ServerYamlCodec()),
                     new GuavaModelRepository<>(
                             CacheBuilder.newBuilder()
                                     .expireAfterAccess(10, TimeUnit.MINUTES)
