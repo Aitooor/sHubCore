@@ -24,9 +24,9 @@ public class PluginModule extends AbstractModule {
         private final Main plugin;
         private final CachedModelRepository<ServerModel> serverCachedModelRepository;
         private final CachedModelRepository<ServerModel> hubCachedModelRepository;
+        private final BungeeManager bungeeManager;
         private final ServerHubManager serverHubManager;
         private final ServerGameManager serverGameManager;
-        private final BungeeManager bungeeManager;
 
         public PluginModule(Main plugin) {
             File pluginFolder = plugin.getDataFolder();
