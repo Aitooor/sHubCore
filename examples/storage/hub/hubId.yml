@@ -1,0 +1,7 @@
+id: "Hub Name"
+permission: "shubcore.hub1"
+name: "Hub Aliase"
+lore:
+  - "Test"
+  - "Test 2"
+  - "Test 3"

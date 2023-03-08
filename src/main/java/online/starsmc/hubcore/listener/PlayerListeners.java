@@ -1,6 +1,7 @@
 package online.starsmc.hubcore.listener;
 
 import online.starsmc.hubcore.Main;
+import online.starsmc.hubcore.user.manager.UserManager;
 import online.starsmc.hubcore.utils.location.LocationCodec;
 import org.bukkit.GameRule;
 import org.bukkit.World;
@@ -16,24 +17,25 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.world.WorldLoadEvent;
+import team.unnamed.inject.InjectAll;
 
 import java.util.Objects;
 
+@InjectAll
 public class PlayerListeners implements Listener {
 
-    private final FileConfiguration config;
-
-    public PlayerListeners(Main plugin) {
-        this.config = plugin.getConfig();
-    }
+    private Main plugin;
+    private FileConfiguration config;
+    private UserManager userManager;
 
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
         event.setJoinMessage(null);
-
         player.teleport(Objects.requireNonNull(LocationCodec.deserialize(Objects.requireNonNull(config.getString("spawn_location")))));
+
+        userManager.isFlying(player);
     }
 
     @EventHandler

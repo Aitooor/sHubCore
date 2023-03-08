@@ -1,0 +1,3 @@
+uuid: "UUID.toString"
+name: "Player#name"
+isFlying: true

@@ -8,16 +8,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import team.unnamed.inject.InjectAll;
 
 import java.util.Objects;
 
+@InjectAll
 public class ChatListener implements Listener {
 
-    private final FileConfiguration config;
-
-    public ChatListener(Main plugin) {
-        this.config = plugin.getConfig();
-    }
+    private FileConfiguration config;
 
     @EventHandler
     public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
