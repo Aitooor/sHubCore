@@ -28,10 +28,6 @@ public class PlayerListeners implements Listener {
     private FileConfiguration config;
     private UserManager userManager;
 
-    public PlayerListeners() {
-        this.config = plugin.getConfig();
-    }
-
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();

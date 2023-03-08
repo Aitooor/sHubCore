@@ -21,6 +21,7 @@ import online.starsmc.hubcore.user.UserModel;
 import online.starsmc.hubcore.user.codec.UserJsonCodec;
 import online.starsmc.hubcore.user.manager.UserManager;
 import online.starsmc.hubcore.utils.BukkitConfiguration;
+import org.bukkit.configuration.file.FileConfiguration;
 import team.unnamed.inject.AbstractModule;
 
 import java.io.File;
@@ -82,7 +83,10 @@ public class PluginModule extends AbstractModule {
 
         @Override
         protected void configure() {
+            FileConfiguration config = plugin.getConfig();
+
             bind(Main.class).toInstance(plugin);
+            bind(FileConfiguration.class).toInstance(config);
 
             bind(ServerHubManager.class).toInstance(serverHubManager);
             bind(ServerGameManager.class).toInstance(serverGameManager);

@@ -34,7 +34,6 @@ public class Main extends JavaPlugin {
         if(scoreboardConfig.get().getBoolean("enable")) {
             scoreboardManager.load();
         }
-        this.getServer().getPluginManager().registerEvents(new ChatListener(this), this);
     }
 
     @Override
